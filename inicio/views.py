@@ -14,7 +14,7 @@ def inicio(request):
 class CrearLibro(CreateView):
     model = Libro
     template_name = 'inicio/CBV/crear_libro_CBV.html'
-    fields = ['titulo', 'autor', 'editorial', 'descripcion']
+    fields = ['titulo', 'autor', 'editorial','precio', 'descripcion']
     success_url = reverse_lazy('inicio:lista_libros')
 
 class ListaLibro(ListView):
@@ -38,7 +38,7 @@ class ListaLibro(ListView):
 class ModificarLibro(UpdateView):
     model = Libro 
     template_name = 'inicio/CBV/modificar_libro_CBV.html'
-    fields = ['titulo', 'autor', 'editorial', 'descripcion']
+    fields = ['titulo', 'autor', 'editorial','precio', 'descripcion']
     success_url = reverse_lazy('inicio:lista_libros')
 
 class EliminarLibro(DeleteView):

@@ -11,7 +11,7 @@ Eliminar Libro
 {% block contenido %}
 <form action={% url 'inicio:eliminar_libro' libro.id %} method="POST">
     {% csrf_token %}
-    <p>Esta seguro de eliminar {{libro}}</p>
+    <p>Esta seguro de eliminar este libro{{libro}}</p>
     <button>Confirmar</button>
 </form>
 {% endblock contenido %}
