@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title_head %}
+<title>Libro</title>
+{% endblock title_head %}
+
+{% block h1_header %}
+{{libro.titulo}}
+{% endblock h1_header %}
+
+{% block contenido %}
+<li>Autor: {{libro.autor}}</li>
+<li>Editorial: {{libro.editorial}}</li>
+<li>Descripcion: {{libro.descripcion}}</li>
+{% endblock contenido %}

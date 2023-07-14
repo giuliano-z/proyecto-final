@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title_head %}
+<title>Modificar Libro</title>
+{% endblock title_head %}
+
+{% block h1_header %}
+Modificar Libro
+{% endblock h1_header %}
+
+{% block contenido %}
+<form action={% url 'inicio:modificar_libro' libro.id %} method="post">
+    {% csrf_token %}
+    <Table>
+        {{form}}
+    </Table>
+    <button>Modificar</button>
+</form>
+{% endblock contenido %}

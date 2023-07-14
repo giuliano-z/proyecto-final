@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title_head %}
+<title>Libros</title>
+{% endblock title_head %}
+
+{% block h1_header %}
+Lista de Libros
+{% endblock h1_header %}
+
+{% block contenido %}
+<button>
+    <a class="navbar-brad" href={% url 'inicio:crear_libro' %}>Crear libro</a>
+</button>
+
+<form action="" method="get">
+    {{formulario}}
+    <button>Buscar</button>
+</form>
+
+{% if libros %}
+{% for libro in libros %}
+
+<li>
+    {{libro}}
+    <a href={% url 'inicio:mostrar_libro' libro.id %}>Ver mas</a>
+    <a href={% url 'inicio:eliminar_libro' libro.id %}>Eliminar</a>
+    <a href={% url 'inicio:modificar_libro' libro.id %}>Modificar</a>
+</li>
+{% endfor %}
+{% else %}
+<li>No se encontraron libros con ese nombre.</li>
+
+{% endif %}
+{% endblock contenido %}
