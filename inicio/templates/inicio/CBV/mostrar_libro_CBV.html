@@ -11,11 +11,15 @@
 {% endblock h1_header %}
 
 {% block contenido %}
-<li>Precio: ${{libro.precio}}</li>
-<li>Resumen: {{libro.descripcion}}</li>
 {% if libro.imagen %}
-<div class="imagen-libro-container">
-    <img src="{{ libro.imagen.url }}" alt="Imagen del libro" class="imagen-libro">
-</div>
+<ul>
+    <li>Precio: ${{ libro.precio }}</li>
+    <li>Resumen: {{ libro.descripcion }}</li>
+    <div class="imagen-libro-container">
+        <img src="{{ libro.imagen.url }}" alt="Imagen del libro" class="imagen-libro">
+    </div>
+    <li>Propietario: {{ libro.propietario.username }}</li>
+    <li>Fecha de Creación: {{ libro.fecha_creacion }}</li>
+</ul>
 {% endif %}
 {% endblock contenido %}

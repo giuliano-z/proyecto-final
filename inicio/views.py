@@ -7,6 +7,8 @@ from inicio.forms import BusquedaFormulario
 from django.views.generic.detail import DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from inicio.forms import CrearLibroFormulario, ModificarLibroFormulario
+from django.utils import timezone
+
 
 # Create your views here.
 
@@ -38,9 +40,11 @@ class CrearLibro(LoginRequiredMixin, CreateView):
     success_url = reverse_lazy('inicio:lista_libros')
 
     def form_valid(self, form):
+        form.instance.propietario = self.request.user
+        form.instance.fecha_creacion = timezone.now()
         form.instance.imagen = self.request.FILES.get('imagen')
         return super().form_valid(form)
-
+        
 class ModificarLibro(LoginRequiredMixin, UpdateView):
     model = Libro
     template_name = 'inicio/CBV/modificar_libro_CBV.html'

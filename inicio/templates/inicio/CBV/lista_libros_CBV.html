@@ -14,22 +14,22 @@ Lista de Libros
 </button>
 
 <form action="" method="get">
-    {{formulario}}
+    {{ formulario }}
     <button>Buscar</button>
 </form>
 
 {% if libros %}
-{% for libro in libros %}
-
-<li>
-    {{libro}}
-    <a href={% url 'inicio:mostrar_libro' libro.id %}>Ver mas</a>
-    <a href={% url 'inicio:eliminar_libro' libro.id %}>Eliminar</a>
-    <a href={% url 'inicio:modificar_libro' libro.id %}>Modificar</a>
-</li>
-{% endfor %}
+<ul>
+    {% for libro in libros %}
+    <li>
+        Titulo: {{ libro.titulo }} - Autor: {{ libro.autor }} - Precio: ${{ libro.precio }}
+        <a href={% url 'inicio:mostrar_libro' libro.id %}>Ver más</a>
+        <a href={% url 'inicio:eliminar_libro' libro.id %}>Eliminar</a>
+        <a href={% url 'inicio:modificar_libro' libro.id %}>Modificar</a>
+    </li>
+    {% endfor %}
+</ul>
 {% else %}
-<li>No se encontraron libros con ese nombre, preuba con otro.</li>
-
+<p>No se encontraron libros con ese nombre, prueba con otro.</p>
 {% endif %}
 {% endblock contenido %}
