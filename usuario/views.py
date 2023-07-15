@@ -4,6 +4,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login as django_login, authenticate
 from usuario.models import InfoExtra
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 # Create your views here.
 
@@ -43,13 +44,23 @@ def editar_perfil(request):
         formulario = FormularioEditarUsuario(request.POST, request.FILES, instance=request.user)
         if formulario.is_valid():
             avatar = formulario.cleaned_data.get('avatar')
+            bibliografia = formulario.cleaned_data.get('bibliografia')
             if avatar:
                 info_extra_user.avatar = avatar
                 info_extra_user.save()
+            if bibliografia:
+                info_extra_user.bibliografia = bibliografia
+                info_extra_user.save()
             formulario.save()
-            return redirect('inicio:inicio')
+            return redirect('usuario:perfil')
     else:
-        formulario = FormularioEditarUsuario(initial={'avatar': info_extra_user.avatar}, instance=request.user)
+        formulario = FormularioEditarUsuario(initial={'avatar': info_extra_user.avatar, 'bibliografia': info_extra_user.bibliografia}, instance=request.user)
 
     return render(request, 'usuario/editar_perfil.html', {'formulario': formulario})
- 
+
+@login_required
+def perfil(request):
+    usuario = request.user
+    info_extra_usuario = InfoExtra.objects.get(user=usuario)
+
+    return render(request, 'usuario/perfil.html', {'usuario': usuario, 'info_extra_usuario': info_extra_usuario})

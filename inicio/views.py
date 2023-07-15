@@ -5,13 +5,14 @@ from django.urls import reverse_lazy
 from django.views.generic.list import ListView
 from inicio.forms import BusquedaFormulario
 from django.views.generic.detail import DetailView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 
 def inicio(request):
     return render(request, 'inicio/inicio.html')
 
-class CrearLibro(CreateView):
+class CrearLibro(LoginRequiredMixin, CreateView):
     model = Libro
     template_name = 'inicio/CBV/crear_libro_CBV.html'
     fields = ['titulo', 'autor', 'editorial','precio', 'descripcion']
@@ -35,13 +36,13 @@ class ListaLibro(ListView):
         contexto['formulario'] = BusquedaFormulario()
         return contexto
 
-class ModificarLibro(UpdateView):
+class ModificarLibro(LoginRequiredMixin, UpdateView):
     model = Libro 
     template_name = 'inicio/CBV/modificar_libro_CBV.html'
     fields = ['titulo', 'autor', 'editorial','precio', 'descripcion']
     success_url = reverse_lazy('inicio:lista_libros')
 
-class EliminarLibro(DeleteView):
+class EliminarLibro(LoginRequiredMixin, DeleteView):
     model = Libro
     template_name ="inicio/CBV/eliminar_libro_CBV.html"
     success_url = reverse_lazy('inicio:lista_libros')

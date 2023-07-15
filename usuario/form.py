@@ -18,7 +18,8 @@ class FormularioEditarUsuario(UserChangeForm):
     first_name = forms.CharField(label='Nombre',max_length=50)
     last_name = forms.CharField(label='Apellido',max_length=50)
     avatar = forms.ImageField(required=False)
+    bibliografia = forms.CharField(label='Bibliografía', widget=forms.Textarea, required=False)
 
     class Meta:
         model= User
-        fields = ['email', 'first_name', 'last_name', 'avatar']
+        fields = ['email', 'first_name', 'last_name', 'avatar', 'bibliografia']
