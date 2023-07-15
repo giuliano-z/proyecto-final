@@ -6,17 +6,12 @@ from django.views.generic.list import ListView
 from inicio.forms import BusquedaFormulario
 from django.views.generic.detail import DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from inicio.forms import CrearLibroFormulario, ModificarLibroFormulario
 
 # Create your views here.
 
 def inicio(request):
     return render(request, 'inicio/inicio.html')
-
-class CrearLibro(LoginRequiredMixin, CreateView):
-    model = Libro
-    template_name = 'inicio/CBV/crear_libro_CBV.html'
-    fields = ['titulo', 'autor', 'editorial','precio', 'descripcion']
-    success_url = reverse_lazy('inicio:lista_libros')
 
 class ListaLibro(ListView):
     model = Libro
@@ -36,11 +31,25 @@ class ListaLibro(ListView):
         contexto['formulario'] = BusquedaFormulario()
         return contexto
 
-class ModificarLibro(LoginRequiredMixin, UpdateView):
-    model = Libro 
-    template_name = 'inicio/CBV/modificar_libro_CBV.html'
-    fields = ['titulo', 'autor', 'editorial','precio', 'descripcion']
+class CrearLibro(LoginRequiredMixin, CreateView):
+    model = Libro
+    template_name = 'inicio/CBV/crear_libro_CBV.html'
+    form_class = CrearLibroFormulario
     success_url = reverse_lazy('inicio:lista_libros')
+
+    def form_valid(self, form):
+        form.instance.imagen = self.request.FILES.get('imagen')
+        return super().form_valid(form)
+
+class ModificarLibro(LoginRequiredMixin, UpdateView):
+    model = Libro
+    template_name = 'inicio/CBV/modificar_libro_CBV.html'
+    form_class = ModificarLibroFormulario
+    success_url = reverse_lazy('inicio:lista_libros')
+
+    def form_valid(self, form):
+        form.instance.imagen = self.request.FILES.get('imagen')
+        return super().form_valid(form)
 
 class EliminarLibro(LoginRequiredMixin, DeleteView):
     model = Libro
@@ -50,3 +59,6 @@ class EliminarLibro(LoginRequiredMixin, DeleteView):
 class  MostrarLibro(DetailView):
     model = Libro
     template_name = "inicio/CBV/mostrar_libro_CBV.html"
+
+def sobre_nosotros(request):
+    return render(request, 'inicio/sobre_nosotros.html')

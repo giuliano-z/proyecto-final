@@ -9,11 +9,11 @@ Modificar Libro
 {% endblock h1_header %}
 
 {% block contenido %}
-<form action={% url 'inicio:modificar_libro' libro.id %} method="post">
+<form action="{% url 'inicio:modificar_libro' libro.id %}" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
-    <Table>
-        {{form}}
-    </Table>
+    <table>
+        {{ form.as_table }}
+    </table>
     <button>Modificar</button>
 </form>
 {% endblock contenido %}

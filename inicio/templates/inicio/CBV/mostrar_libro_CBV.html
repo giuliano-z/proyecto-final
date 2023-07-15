@@ -11,7 +11,11 @@
 {% endblock h1_header %}
 
 {% block contenido %}
-<li>Editorial: {{libro.editorial}}</li>
 <li>Precio: ${{libro.precio}}</li>
 <li>Resumen: {{libro.descripcion}}</li>
+{% if libro.imagen %}
+<div class="imagen-libro-container">
+    <img src="{{ libro.imagen.url }}" alt="Imagen del libro" class="imagen-libro">
+</div>
+{% endif %}
 {% endblock contenido %}
