@@ -24,6 +24,8 @@ Una vez que hayas instalado Oceano de libros, puedes utilizarlo de la siguiente 
 3. Haz clic en un libro para ver más detalles, como su descripción y porpietario.
 4. ¡Disfruta de tus nuevos libros!
 
+También puedes ver un video de demostración que muestra cómo funciona la página en acción: [Video de demostración de Oceano de libros](https://youtu.be/sJUvWGhBJb0). Este video te guiará a través de los pasos mencionados anteriormente y te mostrará cómo utilizar la plataforma de manera efectiva.
+
 ## Estado del proyecto
 Actualmente, Oceano de libros se encuentra en desarrollo. Estamos trabajando arduamente para mejorar la plataforma y añadir nuevas funcionalidades. Mantente atento a las actualizaciones futuras.
 
