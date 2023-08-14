@@ -5,6 +5,9 @@ from django.contrib.auth import login as django_login, authenticate
 from usuario.models import InfoExtra
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.views import PasswordChangeView
 
 # Create your views here.
 
@@ -64,3 +67,7 @@ def perfil(request):
     info_extra_usuario = InfoExtra.objects.get(user=usuario)
 
     return render(request, 'usuario/perfil.html', {'usuario': usuario, 'info_extra_usuario': info_extra_usuario})
+
+class ModificarPass(LoginRequiredMixin, PasswordChangeView):
+    template_name = 'usuario/modificar_pass.html'
+    success_url = reverse_lazy('usuario:perfil')

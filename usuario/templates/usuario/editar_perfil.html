@@ -14,6 +14,8 @@ Editar perfil
     <Table>
         {{formulario}}
     </Table>
+    <button type="button"> <a class="navbar-brand" href={% url 'usuario:modificar_pass' %}>Cambiar contraseña</a>
+    </button>
     <button>Guardar</button>
 </form>
 {% endblock contenido %}
